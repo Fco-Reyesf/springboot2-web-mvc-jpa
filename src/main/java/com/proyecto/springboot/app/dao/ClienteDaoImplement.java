@@ -18,7 +18,7 @@ import com.proyecto.springboot.app.models.entity.Cliente;
  *
  */
 
-@Repository
+@Repository("clienteDaoJPA")
 public class ClienteDaoImplement implements IClienteDao {
 
 	/*
