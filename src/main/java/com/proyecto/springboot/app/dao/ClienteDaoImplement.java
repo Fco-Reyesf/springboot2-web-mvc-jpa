@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +26,8 @@ public class ClienteDaoImplement implements IClienteDao {
 	 * las actualiza, elimina, consulta, operaciones a la bd
 	 * pero como objetos, las consultas van a la clase entity, no a la tabla de la BD
 	 */
+	
+	@Autowired
 	private EntityManager em;
 	
 	/*
