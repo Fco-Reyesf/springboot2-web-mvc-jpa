@@ -22,7 +22,7 @@
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
 					<a class="nav-link active" aria-current="page" href="#">Home</a> <a
-						class="nav-link" th:href="@{/listar}">Clientes</a> <a class="nav-link"</a>
+						class="nav-link" th:href="@{/listar}">Clientes</a> <a class="nav-link"></a>
 				</div>
 			</div>
 		</div>
@@ -30,6 +30,7 @@
 	<div class="container">
 		<h1 class="text-primary border-success border-bottom"
 			th:text="${titulo}"></h1>
+		<a th:href="@{/form}"> Crear cliente </a>
 		<table class="table table-striped">
 			<thead>
 				<tr>
