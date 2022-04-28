@@ -10,34 +10,47 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<h1 th:text="${titulo}" ></h1>
-	<form th:action="@{/form}" th:object="${cliente}" method="post" >
-		<table>
-			<tr>
-				<td>Nombre</td>
-				<td>
-					<input type="text" th:field="*{nombre}" />
-				</td>
-			</tr>
-			<tr>
-				<td>Apellido</td>
-				<td>
-					<input type="text" th:field="*{apellido}" />
-				</td>
-			</tr>
-			<tr>
-				<td>Correo</td>
-				<td>
-					<input type="email" th:field="*{mail}" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="submit" value="Crear cliente" />
-				</td>
-			</tr>
-		</table>
-		<input type="hidden" th:field="*{id}" />	
-	</form>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Menú</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+				aria-controls="navbarNavAltMarkup" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-link active" aria-current="page" href="#">Home</a> <a
+						class="nav-link" th:href="@{/listar}">Clientes</a> <a
+						class="nav-link"></a>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<h1 class="text-primary border-success border-bottom"
+			th:text="${titulo}"></h1>
+		<form th:action="@{/form}" th:object="${cliente}" method="post">
+			<table>
+				<tr>
+					<td>Nombre</td>
+					<td><input type="text" th:field="*{nombre}" class = "form-control" /></td>
+				</tr>
+				<tr>
+					<td>Apellido</td>
+					<td><input type="text" th:field="*{apellido}" class = "form-control" /></td>
+				</tr>
+				<tr>
+					<td>Correo</td>
+					<td><input type="email" th:field="*{mail}"  class = "form-control" /></td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="Crear cliente" class= "btn btn-primary" /></td>
+				</tr>
+			</table>
+			<input type="hidden" th:field="*{id}" />
+		</form>
+	</div>
 </body>
 </html>
