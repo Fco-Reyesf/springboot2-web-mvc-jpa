@@ -28,27 +28,31 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container">
+	<div class="container" >
 		<h1 class="text-primary border-success border-bottom"
 			th:text="${titulo}"></h1>
 		<form th:action="@{/form}" th:object="${cliente}" method="post">
-			<table>
-				<tr>
-					<td>Nombre</td>
-					<td><input type="text" th:field="*{nombre}" class = "form-control" /></td>
-				</tr>
-				<tr>
-					<td>Apellido</td>
-					<td><input type="text" th:field="*{apellido}" class = "form-control" /></td>
-				</tr>
-				<tr>
-					<td>Correo</td>
-					<td><input type="email" th:field="*{mail}"  class = "form-control" /></td>
-				</tr>
-				<tr>
-					<td><input type="submit" value="Crear cliente" class= "btn btn-primary" /></td>
-				</tr>
-			</table>
+			<div class="mb-3">
+				<label class="col-sm-2 colm-form-label">Nombre</label>
+				<div class="col-sm-6">
+					<input type="text" th:field="*{nombre}" class="form-control" />
+				</div>
+			</div>
+			<div class="mb-3">
+				<label class="col-sm-2 colm-form-label">Apellido</label>
+				<div class="col-sm-6">
+					<input type="text" th:field="*{apellido}" class="form-control" />
+				</div>
+			</div>
+			<div class="mb-3">
+				<label class="col-sm-2 colm-form-label">Correo</label>
+				<div class="col-sm-6">
+					<input type="email" th:field="*{mail}" class="form-control" />
+				</div>
+			</div>
+			<div class="mb-3">
+				<input type="submit" value="Crear cliente" class="btn btn-primary" />
+			</div>
 			<input type="hidden" th:field="*{id}" />
 		</form>
 	</div>
