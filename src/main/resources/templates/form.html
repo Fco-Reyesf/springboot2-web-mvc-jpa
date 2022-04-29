@@ -35,25 +35,29 @@
 			<div class="mb-3">
 				<label class="col-sm-2 colm-form-label">Nombre</label>
 				<div class="col-sm-6">
-					<input type="text" th:field="*{nombre}" class="form-control" />
+					<input type="text" th:field="*{nombre}" class="form-control" th:errorClass="'form-control alert-danger'" />
+					<small  th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="form-text text-danger" ></small>
 				</div>
 			</div>
 			<div class="mb-3">
 				<label class="col-sm-2 colm-form-label">Apellido</label>
 				<div class="col-sm-6">
-					<input type="text" th:field="*{apellido}" class="form-control" />
+					<input type="text" th:field="*{apellido}" class="form-control" th:errorClass="'form-control alert-danger'" />
+					<small  th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" class="form-text text-danger" ></small>
 				</div>
 			</div>
 			<div class="mb-3">
 				<label class="col-sm-2 colm-form-label">Correo</label>
 				<div class="col-sm-6">
-					<input type="email" th:field="*{mail}" class="form-control" />
+					<input type="email" th:field="*{mail}" class="form-control" th:errorClass="'form-control alert-danger'" />
+					<small  th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}" class="form-text text-danger" ></small>
 				</div>
 			</div>
 			<div class="mb-3">
 				<label class="col-sm-2 colm-form-label">Fecha</label>
 				<div class="col-sm-6">
-					<input type="text" th:field="*{createAt}" class="form-control" />
+					<input type="text" th:field="*{createAt}" class="form-control" th:errorClass="'form-control alert-danger'" />
+					<small  th:if="${#fields.hasErrors('createAt')}" th:errors="*{createAt}" class="form-text text-danger" ></small>
 				</div>
 			</div>
 			<div class="mb-3">
