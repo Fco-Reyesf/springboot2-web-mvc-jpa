@@ -45,8 +45,18 @@ public class ClienteDaoImplement implements IClienteDao {
 	@Transactional
 	@Override
 	public void save(Cliente cliente) {
+		if (cliente.getId() != null && cliente.getId() > 0) {
+			em.merge(cliente); // actualiza
+		}
+		else {
+			em.persist(cliente); // persisten los datos
+		}
+	}
+
+	@Override
+	public Cliente findById(Long id) {
 		// TODO Auto-generated method stub
-		em.persist(cliente);
+		return em.find(Cliente.class, id);
 	}
 
 }
