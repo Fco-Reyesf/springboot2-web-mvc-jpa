@@ -1,4 +1,4 @@
-package com.proyecto.springboot.app.dao;
+package com.proyecto.springboot.app.models.dao;
 
 import java.util.List;
 
