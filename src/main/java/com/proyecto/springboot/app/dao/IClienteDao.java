@@ -12,4 +12,6 @@ public interface IClienteDao {
 	
 	public Cliente findById(Long id);
 	
+	public void delete(Long id);
+	
 }
