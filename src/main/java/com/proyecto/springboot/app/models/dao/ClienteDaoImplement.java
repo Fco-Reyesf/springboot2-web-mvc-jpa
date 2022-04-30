@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.proyecto.springboot.app.models.entity.Cliente;
 
@@ -35,14 +34,12 @@ public class ClienteDaoImplement implements IClienteDao {
 	 */
 	
 	@SuppressWarnings("unchecked")
-	@Transactional(readOnly = true)
 	@Override
 	public List<Cliente> findAll() {
 		// TODO Auto-generated method stub
 		return em.createQuery("from Cliente").getResultList();
 	}
 
-	@Transactional
 	@Override
 	public void save(Cliente cliente) {
 		if (cliente.getId() != null && cliente.getId() > 0) {
@@ -52,15 +49,13 @@ public class ClienteDaoImplement implements IClienteDao {
 			em.persist(cliente); // persisten los datos
 		}
 	}
-
-	@Transactional(readOnly = true)
+	
 	@Override
 	public Cliente findById(Long id) {
 		// TODO Auto-generated method stub
 		return em.find(Cliente.class, id);
 	}
 
-	@Transactional
 	@Override
 	public void delete(Long id) {
 		em.remove(findById(id));

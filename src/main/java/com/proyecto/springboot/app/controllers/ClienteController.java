@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-
-import com.proyecto.springboot.app.models.dao.IClienteDao;
 import com.proyecto.springboot.app.models.entity.Cliente;
 import com.proyecto.springboot.app.models.service.IClienteService;
 
@@ -24,7 +22,6 @@ import com.proyecto.springboot.app.models.service.IClienteService;
 public class ClienteController {
 
 	@Autowired
-	@Qualifier("clienteDaoJPA")
 	private IClienteService clienteservice;
 	
 	@RequestMapping(value = "/listar", method = RequestMethod.GET)
