@@ -1,45 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="http://wwww.thymeleaf.org">
-<head th:replace="layout/layout :: head" ></head>
+<head th:replace="layout/layout :: head"></head>
 <body>
-	<header th:replace="layout/layout :: header" ></header>
-	<div class="container" >
-		<h1 class="text-primary border-success border-bottom"
-			th:text="${titulo}"></h1>
-		<form th:action="@{/form}" th:object="${cliente}" method="post">
-			<div class="mb-3">
-				<label class="col-sm-2 colm-form-label">Nombre</label>
-				<div class="col-sm-6">
-					<input type="text" th:field="*{nombre}" class="form-control" th:errorClass="'form-control alert-danger'" />
-					<small  th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="form-text text-danger" ></small>
-				</div>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container py-4">
+		<div class="card bg-secondary text-white">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+				<form th:action="@{/form}" th:object="${cliente}" method="post">
+					<div class="mb-3">
+						<label class="col-sm-2 colm-form-label">Nombre</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{nombre}" class="form-control"
+								th:errorClass="'form-control alert-danger'" /> <small
+								th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+								class="form-text text-white"></small>
+						</div>
+					</div>
+					<div class="mb-3">
+						<label class="col-sm-2 colm-form-label">Apellido</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{apellido}" class="form-control"
+								th:errorClass="'form-control alert-danger'" /> <small
+								th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"
+								class="form-text text-white"></small>
+						</div>
+					</div>
+					<div class="mb-3">
+						<label class="col-sm-2 colm-form-label">Correo</label>
+						<div class="col-sm-6">
+							<input type="email" th:field="*{mail}" class="form-control"
+								th:errorClass="'form-control alert-danger'" /> <small
+								th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"
+								class="form-text text-white"></small>
+						</div>
+					</div>
+					<div class="mb-3">
+						<label class="col-sm-2 colm-form-label">Fecha</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{createAt}" class="form-control"
+								th:errorClass="'form-control alert-danger'" /> <small
+								th:if="${#fields.hasErrors('createAt')}" th:errors="*{createAt}"
+								class="form-text text-white"></small>
+						</div>
+					</div>
+					<div class="mb-3">
+						<input type="submit" value="Crear cliente" class="btn btn-info" />
+					</div>
+				</form>
 			</div>
-			<div class="mb-3">
-				<label class="col-sm-2 colm-form-label">Apellido</label>
-				<div class="col-sm-6">
-					<input type="text" th:field="*{apellido}" class="form-control" th:errorClass="'form-control alert-danger'" />
-					<small  th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" class="form-text text-danger" ></small>
-				</div>
-			</div>
-			<div class="mb-3">
-				<label class="col-sm-2 colm-form-label">Correo</label>
-				<div class="col-sm-6">
-					<input type="email" th:field="*{mail}" class="form-control" th:errorClass="'form-control alert-danger'" />
-					<small  th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}" class="form-text text-danger" ></small>
-				</div>
-			</div>
-			<div class="mb-3">
-				<label class="col-sm-2 colm-form-label">Fecha</label>
-				<div class="col-sm-6">
-					<input type="text" th:field="*{createAt}" class="form-control" th:errorClass="'form-control alert-danger'" />
-					<small  th:if="${#fields.hasErrors('createAt')}" th:errors="*{createAt}" class="form-text text-danger" ></small>
-				</div>
-			</div>
-			<div class="mb-3">
-				<input type="submit" value="Crear cliente" class="btn btn-primary" />
-			</div>
-		</form>
+		</div>
 	</div>
-	<footer th:replace="layout/layout :: footer" ></footer>
+	<footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>
