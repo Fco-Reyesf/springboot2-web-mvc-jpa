@@ -27,6 +27,10 @@
 				</div>
 			</div>
 		</nav>
+		<div class="alert alert-success" th:if="${success != null}" th:text="${success}" role="alert"></div>
+		<div class="alert alert-danger" th:if="${danger != null}" th:text="${danger}" role="alert"></div>
+		<div class="alert alert-warning" th:if="${warning != null}" th:text="${warning}" role="alert"></div>
+		<div class="alert alert-info" th:if="${info != null}" th:text="${info}" role="alert"></div>
 	</header>
 	<div class="container">
 		<footer th:fragment="footer" class="container-fluid">
