@@ -26,24 +26,21 @@ public class PageRender<T> {
 		if (totalPagina <= numeroElementosPorPagina) {
 			desde = 1;
 			hasta = totalPagina;
-		}
-		else {
-			if (paginaActual <= numeroElementosPorPagina/2) {
+		} else {
+			if (paginaActual <= numeroElementosPorPagina / 2) {
 				desde = 1;
 				hasta = numeroElementosPorPagina;
-			}
-			else if (paginaActual >= totalPagina - numeroElementosPorPagina/2) {
+			} else if (paginaActual >= totalPagina - numeroElementosPorPagina / 2) {
 				desde = totalPagina - numeroElementosPorPagina + 1;
 				hasta = numeroElementosPorPagina;
-			}
-			else {
-				desde = paginaActual - numeroElementosPorPagina/2;
+			} else {
+				desde = paginaActual - numeroElementosPorPagina / 2;
 				hasta = numeroElementosPorPagina;
 			}
 		}
 		
-		for (int i = 0 ; i < hasta ; i++ ) {
-			paginas.add(new PageItem(desde + 1, paginaActual == desde +i));
+		for (int i = 0; i < hasta; i++) {
+			paginas.add(new PageItem(desde + i, paginaActual == desde + i));
 		}
 		
 		
