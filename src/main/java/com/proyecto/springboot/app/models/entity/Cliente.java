@@ -48,6 +48,8 @@ public class Cliente implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createAt;
 	
+	public String foto;
+	
 	public void prePersist() {
 		createAt = new Date();
 	}
@@ -94,6 +96,14 @@ public class Cliente implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 	
 	
