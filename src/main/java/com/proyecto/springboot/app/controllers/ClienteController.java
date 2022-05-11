@@ -78,8 +78,7 @@ public class ClienteController {
 			return "form";
 		}
 		if (!foto.isEmpty()) {
-			Path directorioFotos = Paths.get("src//main//resources//static//uploads");
-			String directorioPath = directorioFotos.toFile().getAbsolutePath();
+			String directorioPath = "C://temp//uploads";
 			try {
 				byte[] bytes = foto.getBytes();
 				Path rutaCompleta =Paths.get(directorioPath + "//" + foto.getOriginalFilename());
