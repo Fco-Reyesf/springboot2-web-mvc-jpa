@@ -1,5 +1,6 @@
 package com.proyecto.springboot.app.controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -44,11 +45,13 @@ public class ClienteController {
 	@Autowired
 	private IClienteService clienteservice;
 	
+	private final String CARPETA_IMAGENES = "uploads";
+	
 	private final Logger log = LoggerFactory.getLogger(getClass());
 	
 	@RequestMapping(value = "/uploads/{filename:.+}", method = RequestMethod.GET)
 	public ResponseEntity<Resource> verImagen (@PathVariable String filename){
-		Path pathFoto = Paths.get("uploads").resolve(filename).toAbsolutePath();
+		Path pathFoto = Paths.get(CARPETA_IMAGENES).resolve(filename).toAbsolutePath();
 		log.info("pathFoto: " + pathFoto);
 		Resource recurso = null;
 		try {
@@ -105,8 +108,18 @@ public class ClienteController {
 			return "form";
 		}
 		if (!foto.isEmpty()) {
+			if(cliente.getId() != null 
+					&& cliente.getId() > 0 
+					&& cliente.getFoto() != null
+					&& cliente.getFoto().length() > 0) {
+				Path rootPath = Paths.get(CARPETA_IMAGENES).resolve(cliente.getFoto()).toAbsolutePath();
+				File imagen = rootPath.toFile();
+				if (imagen.exists() && imagen.canRead()) {
+					imagen.delete();
+				}
+			}
 			String uniqueFilename = UUID.randomUUID().toString() + "_" + foto.getOriginalFilename() ;
-			Path directorioPath = Paths.get("uploads").resolve(uniqueFilename);
+			Path directorioPath = Paths.get(CARPETA_IMAGENES).resolve(uniqueFilename);
 			Path rootAbsolutPath = directorioPath.toAbsolutePath();
 			log.info("directorioPath: " + directorioPath );
 			log.info("rootAbsolutPath: " + rootAbsolutPath );
@@ -147,8 +160,17 @@ public class ClienteController {
 	@RequestMapping(value = "/eliminar/{id}")
 	public String eliminar( @PathVariable(value = "id") Long id , RedirectAttributes flash) {
 		if (id > 0) {
+			Cliente cliente = clienteservice.findById(id);
 			clienteservice.delete(id);
 			flash.addFlashAttribute("success","Cliente eliminado con exito");
+			Path rootPath = Paths.get(CARPETA_IMAGENES).resolve(cliente.getFoto()).toAbsolutePath();
+			File foto = rootPath.toFile();
+			if (foto.exists() && foto.canRead()) {
+				if (foto.delete()) {
+					flash.addFlashAttribute("info","Foto: " + cliente.getFoto() + " se ha eliminado");
+				}
+			}
+			
 		}
 		return "redirect:/listar";
 	}
