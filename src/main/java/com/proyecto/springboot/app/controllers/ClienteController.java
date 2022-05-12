@@ -1,22 +1,13 @@
 package com.proyecto.springboot.app.controllers;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.validation.Valid;
 
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -36,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyecto.springboot.app.models.entity.Cliente;
 import com.proyecto.springboot.app.models.service.IClienteService;
+import com.proyecto.springboot.app.models.service.IUploadFileService;
 import com.proyecto.springboot.app.utils.paginator.PageRender;
 
 @Controller
@@ -45,20 +37,14 @@ public class ClienteController {
 	@Autowired
 	private IClienteService clienteservice;
 	
-	private final String CARPETA_IMAGENES = "uploads";
-	
-	private final Logger log = LoggerFactory.getLogger(getClass());
+	@Autowired
+	private IUploadFileService UploadFileService;
 	
 	@RequestMapping(value = "/uploads/{filename:.+}", method = RequestMethod.GET)
 	public ResponseEntity<Resource> verImagen (@PathVariable String filename){
-		Path pathFoto = Paths.get(CARPETA_IMAGENES).resolve(filename).toAbsolutePath();
-		log.info("pathFoto: " + pathFoto);
 		Resource recurso = null;
 		try {
-			recurso = new UrlResource(pathFoto.toUri());
-			if (!recurso.exists() || !recurso.isReadable()) {
-				throw new RuntimeException("Errors: no se puede cargar la imagen: " + pathFoto.toString());
-			}
+			recurso = UploadFileService.load(filename);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -112,24 +98,17 @@ public class ClienteController {
 					&& cliente.getId() > 0 
 					&& cliente.getFoto() != null
 					&& cliente.getFoto().length() > 0) {
-				Path rootPath = Paths.get(CARPETA_IMAGENES).resolve(cliente.getFoto()).toAbsolutePath();
-				File imagen = rootPath.toFile();
-				if (imagen.exists() && imagen.canRead()) {
-					imagen.delete();
-				}
+				UploadFileService.delete(cliente.getFoto());
 			}
-			String uniqueFilename = UUID.randomUUID().toString() + "_" + foto.getOriginalFilename() ;
-			Path directorioPath = Paths.get(CARPETA_IMAGENES).resolve(uniqueFilename);
-			Path rootAbsolutPath = directorioPath.toAbsolutePath();
-			log.info("directorioPath: " + directorioPath );
-			log.info("rootAbsolutPath: " + rootAbsolutPath );
+			String uniqueFilename = null;
 			try {
-				Files.copy(foto.getInputStream(), rootAbsolutPath);
-				flash.addFlashAttribute("info","se ha subido correctamente" + uniqueFilename);
-				cliente.setFoto(uniqueFilename);
+				uniqueFilename = UploadFileService.copy(foto);
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			flash.addFlashAttribute("info","se ha subido correctamente" + uniqueFilename);
+			cliente.setFoto(uniqueFilename);
 		}
 		String mensajeFlash = (cliente.getId() != null)? "Cliente editado con exito" : "Cliente creado con exito";
 		clienteservice.save(cliente);
@@ -162,15 +141,10 @@ public class ClienteController {
 		if (id > 0) {
 			Cliente cliente = clienteservice.findById(id);
 			clienteservice.delete(id);
-			flash.addFlashAttribute("success","Cliente eliminado con exito");
-			Path rootPath = Paths.get(CARPETA_IMAGENES).resolve(cliente.getFoto()).toAbsolutePath();
-			File foto = rootPath.toFile();
-			if (foto.exists() && foto.canRead()) {
-				if (foto.delete()) {
-					flash.addFlashAttribute("info","Foto: " + cliente.getFoto() + " se ha eliminado");
-				}
+			flash.addFlashAttribute("success", "Cliente eliminado con exito");
+			if (UploadFileService.delete(cliente.getFoto())) {
+				flash.addFlashAttribute("info", "Foto: " + cliente.getFoto() + " se ha eliminado");
 			}
-			
 		}
 		return "redirect:/listar";
 	}
