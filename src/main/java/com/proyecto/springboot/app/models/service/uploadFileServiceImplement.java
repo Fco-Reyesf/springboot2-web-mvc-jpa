@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -58,5 +59,15 @@ private final String CARPETA_IMAGENES = "uploads";
 
 	public Path getPath(String filename) {
 		return Paths.get(CARPETA_IMAGENES).resolve(filename).toAbsolutePath();
+	}
+
+	@Override
+	public void deleteAll() {
+		FileSystemUtils.deleteRecursively(Paths.get(CARPETA_IMAGENES).toFile());
+	}
+
+	@Override
+	public void init() throws IOException {
+		Files.createDirectories(Paths.get(CARPETA_IMAGENES));
 	}
 }
