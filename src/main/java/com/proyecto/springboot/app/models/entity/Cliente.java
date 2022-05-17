@@ -58,7 +58,7 @@ public class Cliente implements Serializable{
 	// LAZY : carga perezosa, solo carga lo necesario de factura (recomendado)
 	// EAGER : carga tambien la relacion con el cliente
 	
-	@OneToMany(mappedBy = "cliente" , fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Factura> facturas;
 	
 	public List<Factura> getFacturas() {

@@ -12,19 +12,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "factura_items")
+@Table(name = "facturas_items")
 public class ItemFactura implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private Integer cantidad;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "producto_id")
 	private Producto producto;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -40,11 +40,11 @@ public class ItemFactura implements Serializable {
 	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
-	
+
 	public Double calcularImporte() {
-		return cantidad.doubleValue()*producto.getPrecio();
+		return cantidad.doubleValue() * producto.getPrecio();
 	}
 
-	public static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 }

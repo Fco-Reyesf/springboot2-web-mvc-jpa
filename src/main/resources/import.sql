@@ -1,3 +1,5 @@
+/* lista de clientes */
+
 INSERT INTO clientes (id, nombre, apellido, mail, create_at, foto) VALUES (1, 'nombre1', 'apellido1', 'mail1@mail.com', '2018-07-19', '');
 INSERT INTO clientes (id, nombre, apellido, mail, create_at , foto) VALUES (2, 'nombre2', 'apellido2', 'mail2@mail.com', '2019-08-20', '');
 INSERT INTO clientes (id, nombre, apellido, mail, create_at, foto) VALUES (3, 'nombre3', 'apellido3', 'mail2@mail.com', '2019-08-20', '');
@@ -23,3 +25,13 @@ INSERT INTO clientes (id, nombre, apellido, mail, create_at, foto) VALUES (22, '
 INSERT INTO clientes (id, nombre, apellido, mail, create_at, foto) VALUES (23, 'nombre23', 'apellido22', 'mail2@mail.com', '2019-08-20', '');
 INSERT INTO clientes (id, nombre, apellido, mail, create_at, foto) VALUES (24, 'nombre24', 'apellido24', 'mail2@mail.com', '2019-08-20', '');
 INSERT INTO clientes (id, nombre, apellido, mail, create_at, foto) VALUES (25, 'nombre25', 'apellido25', 'mail2@mail.com', '2019-08-20', '');
+
+/* lista de productos */
+
+INSERT INTO productos (nombre, precio, create_at) VALUES ('pro1', 1111, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES ('pro2', 2222, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES ('pro3', 3333, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES ('pro4', 4444, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES ('pro5', 5555, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES ('pro6', 6666, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES ('pro7', 7777, NOW());
