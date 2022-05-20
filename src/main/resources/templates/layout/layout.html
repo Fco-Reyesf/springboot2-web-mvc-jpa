@@ -3,9 +3,8 @@
 <head th:fragment="head">
 <meta charset="UTF-8" />
 <title th:text=" ' Spring Boot: MVC + Thymeleaf + JPA' + ${titulo}"></title>
-<link
-	th:href="@{/css/bootstrap.min.css}"
-	rel="stylesheet">
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/jquery-ui.min.css}" rel="stylesheet">
 </head>
 <body>
 	<header th:fragment="header">
@@ -27,15 +26,19 @@
 				</div>
 			</div>
 		</nav>
-		<div class="alert alert-success" th:if="${success != null}" th:text="${success}" role="alert"></div>
-		<div class="alert alert-danger" th:if="${danger != null}" th:text="${danger}" role="alert"></div>
-		<div class="alert alert-warning" th:if="${warning != null}" th:text="${warning}" role="alert"></div>
-		<div class="alert alert-info" th:if="${info != null}" th:text="${info}" role="alert"></div>
+		<div class="alert alert-success" th:if="${success != null}"
+			th:text="${success}" role="alert"></div>
+		<div class="alert alert-danger" th:if="${danger != null}"
+			th:text="${danger}" role="alert"></div>
+		<div class="alert alert-warning" th:if="${warning != null}"
+			th:text="${warning}" role="alert"></div>
+		<div class="alert alert-info" th:if="${info != null}"
+			th:text="${info}" role="alert"></div>
 	</header>
 	<div class="container">
 		<footer th:fragment="footer" class="container-fluid">
-			<script
-				th:src="@{/js/bootstrap.min.js}"></script>
+			<script th:src="@{/js/bootstrap.min.js}"></script>
+			<script th:src="@{/js/jquery-ui.min.js}"></script>
 		</footer>
 	</div>
 </body>
