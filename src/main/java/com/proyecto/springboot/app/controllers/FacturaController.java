@@ -1,5 +1,6 @@
 package com.proyecto.springboot.app.controllers;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyecto.springboot.app.models.entity.Cliente;
 import com.proyecto.springboot.app.models.entity.Factura;
+import com.proyecto.springboot.app.models.entity.Producto;
 import com.proyecto.springboot.app.models.service.IClienteService;
 
 @Controller
@@ -34,6 +36,11 @@ public class FacturaController {
 		model.put("factura", factura);
 		model.put("titulo", "Crear Factura");
 		return "/factura/form";
+	}
+	
+	@GetMapping(value = "/form/cargar-productos/{nombre}", produces = "application/json")
+	public List<Producto> cargarProductos(@PathVariable String nombre){
+		return clienteService.findByNombre(nombre);
 	}
 	
 }
