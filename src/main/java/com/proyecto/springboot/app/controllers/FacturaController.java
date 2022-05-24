@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -38,9 +40,9 @@ public class FacturaController {
 		return "/factura/form";
 	}
 	
-	@GetMapping(value = "/form/cargar-productos/{nombre}", produces = "application/json")
-	public List<Producto> cargarProductos(@PathVariable String nombre){
-		return clienteService.findByNombre(nombre);
+	@GetMapping(value = "/cargar-productos/{term}",  produces = { "application/json" })
+	public @ResponseBody List<Producto> cargarProductos(@PathVariable(name = "term", required = false, value = "") String term) {
+		return clienteService.findByNombre(term);
 	}
 	
 }

@@ -56,9 +56,10 @@ public class ClienteServiceImp implements IClienteService {
 		return clienteDao.findAll(pageable);
 	}
 
+	@Override
 	@Transactional(readOnly = true)
-	public List<Producto> findByNombre(String nombre) {
-		return productoDao.findByNombre(nombre);
-	} 
+	public List<Producto> findByNombre(String term) {
+		return productoDao.findByNombreLikeIgnoreCase("%" + term + "%");
+	}
 	
 }
