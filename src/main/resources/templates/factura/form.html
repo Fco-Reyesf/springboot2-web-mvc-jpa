@@ -46,7 +46,21 @@
 								class="form-control" />
 						</div>
 					</div>
-					<table th:replace="factura/plantilla-autocompletar :: itemsFactura" ></table>
+					<table th:replace="factura/plantilla-autocompletar :: itemsFactura"></table>
+					<div class="col-sm-4">
+					<table id="cargarItemProductos" class="table table-sm table-striped table-hover" >
+						<thead>
+							<tr>
+								<td>Nombre</td>
+								<td>Precio</td>
+								<td>Cantidad</td>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					</div>
+					
 					<div class="mb-3 row">
 						<div class="col-sm-6">
 							<input type="submit" th:value="${titulo}" class="btn-secondary" />
