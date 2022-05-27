@@ -23,7 +23,14 @@
 					},
 				});
 			},
+			
+			focus: function(event, ui){
+			    event.preventDefault();
+			    $('input[name="buscar_producto"]').val(ui.item.label);
+			},
+			
 			select : function(event, ui) {
+				
 				$("#buscar_producto").val(ui.item.label);
 				/*
 				var linea = $("#plantillaItemsFactura").html();
